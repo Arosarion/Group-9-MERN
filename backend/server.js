@@ -7,6 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//Topic Routes
+app.use('/api/topics', require('./routes/topicRoutes'));
+
 app.get('/', (req, res) => {
   res.json({ message: 'API is running' });
 });
