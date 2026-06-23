@@ -3,12 +3,12 @@ const router = express.Router();
 
 const {
     getTopics,
-    gettopicBySlug,
+    getTopicBySlug,
     createTopic,
 } = require("../controllers/topicController");
 
 router.get("/", getTopics);
-router.get("/:slug", gettopicBySlug);
+router.get("/:slug", getTopicBySlug);
 router.post("/", createTopic);
 
 module.exports = router;
