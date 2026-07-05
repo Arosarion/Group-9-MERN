@@ -1,14 +1,26 @@
 const express = require("express");
 const router = express.Router();
-// const authMiddleware = require("../middleware/authMiddleware"); // uncomment when authMiddleware is ready
+const authMiddleware = require("../middleware/authMiddleware");
 
-const { registerUser, loginUser } = require("../controllers/authController");
+const {
+  registerUser,
+  loginUser,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  getProfile,
+  changePassword,
+} = require("../controllers/authController");
 
-// Public auth routes
+// Public routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
+router.get("/verify/:token", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
-// Protected routes — uncomment once authMiddleware is ready
-// router.get("/profile", authMiddleware, getProgress);
+// Protected routes
+router.get("/profile", authMiddleware, getProfile);
+router.post("/change-password", authMiddleware, changePassword);
 
 module.exports = router;
