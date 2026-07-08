@@ -4,7 +4,7 @@ const router = express.Router();
 const {
     getQuestionsByTopic,
     createQuestion
-} = require("../controllers/questionController");
+} = require("../controllers/quizController");
 
 router.get("/:topicSlug", getQuestionsByTopic);
 router.post("/", createQuestion);

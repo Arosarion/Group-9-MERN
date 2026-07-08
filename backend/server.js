@@ -22,6 +22,7 @@ mongoose
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/topics", require("./routes/topicRoutes"));
 app.use("/api/quizzes", require("./routes/quizRoutes"));
+app.use("/api/game", require("./routes/gameRoutes"));
 
 // status check route
 app.get("/", (req, res) => {
