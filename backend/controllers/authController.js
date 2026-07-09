@@ -42,7 +42,11 @@ const registerUser = async (req, res, next) => {
       subject: "Verify your email",
       html: `<p>Click here to verify your email: <a href="${process.env.BASE_URL}/api/auth/verify/${verificationToken}">Verify</a></p>`,
     };
-    await sgMail.send(msg);
+    try {
+      await sgMail.send(msg);
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError.message);
+    }
 
     res.status(201).json({
       success: true,
@@ -162,7 +166,12 @@ const forgotPassword = async (req, res, next) => {
         <p>If you didn't request this, ignore this email.</p>
       `,
     };
-    await sgMail.send(msg);
+
+    try {
+      await sgMail.send(msg);
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError.message);
+    }
 
     res.json({
       success: true,
