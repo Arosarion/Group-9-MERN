@@ -5,8 +5,10 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from 'react-router-dom';
 
 function RegistrationPage() {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -36,6 +38,7 @@ function RegistrationPage() {
       // TODO: replace with your actual registration logic
       // e.g. call your backend API: POST /api/register
       console.log('Registering user:', formData);
+      navigate('/home');
     }
 
     setValidated(true);

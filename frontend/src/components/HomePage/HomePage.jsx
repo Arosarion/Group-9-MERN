@@ -1,9 +1,8 @@
 import { useState } from "react";
-import "./InfoPages.css";
 import { Link } from 'react-router-dom'
 import NavBar from "../NavBar";
 
-export default function Anatomy() {
+export default function Home() {
     return (
         <div>
             <NavBar />
