@@ -7,7 +7,7 @@ import './App.css'
 import  './components/Login/Login.css'
 
 import Login from "./components/Login/Login";
-import RegistrationPage from "./components/Login/register/RegistrationPage";
+import RegistrationPage from "./components/register/RegistrationPage";
 
 function App() {
   return (
