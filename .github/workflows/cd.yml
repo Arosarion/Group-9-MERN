@@ -20,4 +20,6 @@ jobs:
             cd ~/Group-9-MERN
             git pull origin main
             npm install --prefix backend
+            npm install --prefix frontend
+            npm run build --prefix frontend
             pm2 restart group9-api --update-env
