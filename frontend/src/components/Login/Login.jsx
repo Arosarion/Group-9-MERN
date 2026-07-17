@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Login.css";
 import { Link } from 'react-router-dom'
+import { loginUser } from "../../api/auth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -15,13 +16,18 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Login Data:", formData);
-
-    // TODO:
-    // Call your authentication API here
+    const data = await loginUser(formData.email, formData.password);
+  
+    if (data.success) {
+      localStorage.setItem('token', data.accessToken);
+      localStorage.setItem('username', data.username);
+      window.location.href = '/home'; // redirect to home
+    } else {
+      alert(data.error || 'Login failed');
+    }
   };
 
   return (
@@ -59,9 +65,10 @@ export default function Login() {
         </form>
 
         <div className="login-footer">
-          <a href="/">Forgot Password?</a>
+          <Link to="/forgot-password">Forgot Password?</Link>
           <p>
-            Don't have an account? <Link to="/register"><a href="/signup">Sign Up</a></Link>
+            Don't have an account? <Link to="/register">Sign Up</Link>
+
           </p>
         </div>
       </div>
