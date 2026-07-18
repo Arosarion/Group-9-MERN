@@ -1,11 +1,10 @@
 const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 const sgMail = require("@sendgrid/mail");
 const crypto = require("crypto"); // for generating random tokens
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY); // set sendgrid api key from env
-}
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Register a new user
 const registerUser = async (req, res, next) => {

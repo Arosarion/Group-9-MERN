@@ -28,3 +28,5 @@ const quizQuestionSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("QuizQuestion", quizQuestionSchema);
+
+
