@@ -19,7 +19,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/forgot-password" element={<ForgotPass />} />
-
+    
       <Route
         path="/home"
         element={
