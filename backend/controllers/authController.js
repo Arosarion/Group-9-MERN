@@ -40,7 +40,7 @@ const registerUser = async (req, res, next) => {
       to: email,
       from: process.env.SENDGRID_SENDER_EMAIL,
       subject: "Verify your email",
-      html: `<p>Click here to verify your email: <a href="${process.env.BASE_URL}/api/auth/verify/${verificationToken}">Verify</a></p>`,
+      html: `<p>Click here to verify your email: <a href="${process.env.BASE_URL}/verify/${verificationToken}">Verify</a></p>`,
     };
     try {
       await sgMail.send(msg);
@@ -161,7 +161,7 @@ const forgotPassword = async (req, res, next) => {
       subject: "Password Reset Request",
       html: `
         <p>You requested a password reset.</p>
-                <p>Click <a href="${process.env.BASE_URL}/api/auth/reset-password/${resetToken}">here</a> to reset your password.</p>
+        <p>Click <a href="${process.env.BASE_URL}/reset-password/${resetToken}">here</a> to reset your password.</p>
         <p>This link expires in 1 hour.</p>
         <p>If you didn't request this, ignore this email.</p>
       `,
