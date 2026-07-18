@@ -30,6 +30,7 @@ const registerUser = async (req, res, next) => {
       email,
       password: hashedPassword,
       verificationToken: verificationToken, // save to user document for later verification
+      verificationTokenExpires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24h
     });
 
     await newUser.save();
@@ -91,7 +92,7 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }, // Token set to expire in an hour, will change to 24h ones tested
+      { expiresIn: "24h" }, // 24h
     );
 
     res.json({
@@ -110,7 +111,10 @@ const loginUser = async (req, res, next) => {
 const verifyEmail = async (req, res, next) => {
   try {
     const { token } = req.params;
-    const user = await User.findOne({ verificationToken: token });
+    const user = await User.findOne({
+      verificationToken: token,
+      verificationTokenExpires: { $gt: Date.now() }, // not expired
+    });
 
     if (!user) {
       return res.status(400).json({
@@ -125,6 +129,43 @@ const verifyEmail = async (req, res, next) => {
     res.json({
       success: true,
       message: "Email verified successfully, You can now log in.",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Resend verification to email
+const resendVerification = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: "Email required" });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+    if (user.isVerified)
+      return res.status(400).json({ error: "Email already verified" });
+
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    user.verificationToken = verificationToken;
+    user.verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    await user.save();
+
+    const msg = {
+      to: email,
+      from: process.env.SENDGRID_SENDER_EMAIL,
+      subject: "Verify your email",
+      html: `<p>Click here to verify your email: <a href="${process.env.BASE_URL}/verify/${verificationToken}">Verify</a></p>`,
+    };
+    try {
+      await sgMail.send(msg);
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError.message);
+    }
+
+    res.json({
+      success: true,
+      message: "Verification email resent. Please check your inbox.",
     });
   } catch (error) {
     next(error);
@@ -269,6 +310,7 @@ module.exports = {
   registerUser,
   loginUser,
   verifyEmail,
+  resendVerification,
   forgotPassword,
   changePassword,
   resetPassword,

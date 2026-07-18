@@ -1,56 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+const [resendStatus, setResendStatus] = useState("");
+const [email, setEmail] = useState("");
 
-function VerifyEmail() {
-  const { token } = useParams();
-  const [status, setStatus] = useState("loading"); // loading, success, error
-
-  useEffect(() => {
-    const verify = async () => {
-      try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/auth/verify/${token}`,
-        );
-        const data = await res.json();
-
-        if (data.success) {
-          setStatus("success");
-        } else {
-          setStatus("error");
-        }
-      } catch {
-        setStatus("error");
-      }
-    };
-
-    verify();
-  }, [token]);
-
-  if (status === "loading") {
-    return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <p>Verifying your email...</p>
-      </div>
-    );
+const handleResend = async () => {
+  if (!email) {
+    setResendStatus("Please enter your email address.");
+    return;
   }
-
-  if (status === "success") {
-    return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <h2>Email Verified!</h2>
-        <p>Your account is now active. You can log in.</p>
-        <Link to="/">Go to Login</Link>
-      </div>
+  try {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/auth/resend-verification`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      },
     );
+    const data = await res.json();
+    if (data.success) {
+      setResendStatus("Verification email sent! Check your inbox.");
+    } else {
+      setResendStatus(data.error || "Something went wrong.");
+    }
+  } catch {
+    setResendStatus("Something went wrong. Please try again.");
   }
-
-  return (
-    <div style={{ textAlign: "center", padding: "4rem" }}>
-      <h2>Verification Failed</h2>
-      <p>The link is invalid or has expired. Please register again.</p>
-      <Link to="/register">Register</Link>
-    </div>
-  );
-}
-
-export default VerifyEmail;
+};
