@@ -8,6 +8,7 @@ import "./components/informationpages/InfoPages.css";
 import Login from "./components/Login/Login";
 import RegistrationPage from "./components/register/RegistrationPage";
 import ForgotPass from "./components/ForgotPassword/ForgotPass"; // TODO change if ForgotPass is diff name
+import VerifyEmail from "./components/VerifyEmail/VerifyEmail";
 import FirstAid from "./components/informationpages/FirstAid";
 import Home from "./components/HomePage/HomePage";
 import Anatomy from "./components/informationpages/Anatomy";
@@ -19,7 +20,8 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/forgot-password" element={<ForgotPass />} />
-    
+      <Route path="/verify/:token" element={<VerifyEmail />} />
+
       <Route
         path="/home"
         element={
