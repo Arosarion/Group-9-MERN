@@ -11,7 +11,7 @@ import ForgotPass from "./components/ForgotPassword/ForgotPass"; // TODO change 
 import VerifyEmail from "./components/VerifyEmail/VerifyEmail";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import FirstAid from "./components/informationpages/FirstAid";
-import Home from "./components/HomePage/HomePage";
+import Home from "./components/LandingPage/LandingPage";
 import Anatomy from "./components/informationpages/Anatomy";
 import ProtectedRoute from "./components/ProtectedRoute";
 
