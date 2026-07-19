@@ -1,160 +1,224 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { registerUser } from '../../api/auth';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { registerUser } from "../../api/auth";
+import "./RegistrationPage.css";
 
 function RegistrationPage() {
-  const [validated, setValidated] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
+  const [pulse, setPulse] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const passwordsMatch = formData.password === formData.confirmPassword;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false || !passwordsMatch) {
-      event.preventDefault();
-      event.stopPropagation();
-      setValidated(true);
+    if (formData.password !== formData.confirmPassword) {
+      setPulse("error");
+      setErrorMsg("Passwords do not match.");
+      setTimeout(() => setPulse(""), 800);
       return;
     }
-    event.preventDefault();
-    setValidated(true);
 
-    // Combine first and last name as username
-    const username = `${formData.firstName} ${formData.lastName}`.trim();
-    const data = await registerUser(username, formData.email, formData.password);
+    if (formData.password.length < 8) {
+      setPulse("error");
+      setErrorMsg("Password must be at least 8 characters.");
+      setTimeout(() => setPulse(""), 800);
+      return;
+    }
+
+    const data = await registerUser(
+      formData.username,
+      formData.email,
+      formData.password,
+    );
 
     if (data.success) {
-      setSuccess(true); // show "check your email" message
+      setPulse("success");
+      setTimeout(() => setSuccess(true), 800);
     } else {
-      setError(data.error || 'Registration failed. Please try again.');
+      setPulse("error");
+      setErrorMsg(data.error || "Registration failed. Please try again.");
+      setTimeout(() => setPulse(""), 800);
     }
   };
 
-  // Show success message after registration
   if (success) {
     return (
-      <Container className="py-5" style={{ maxWidth: '600px', textAlign: 'center' }}>
-        <h2>Check your email!</h2>
-        <p>We sent a verification link to <strong>{formData.email}</strong>. Click it to activate your account before logging in.</p>
-        <Link to="/">Back to Login</Link>
-      </Container>
+      <div className="reg-container">
+        <div className="reg-left">
+          <div className="reg-logo">
+            <span className="reg-logo-triangle">▲</span>
+            <span className="reg-logo-text">MEDSPACE</span>
+          </div>
+          <div className="reg-brand">
+            <h1 className="reg-title">
+              MED
+              <br />
+              <span>SPACE</span>
+            </h1>
+            <div className="reg-tagline-row">
+              <div className="reg-accent-line"></div>
+              <p className="reg-tagline">
+                Medical education.
+                <br />
+                Learn. Quiz. Track.
+              </p>
+            </div>
+            <div className="reg-meta">MEDSPACE.DEV — 2026</div>
+          </div>
+        </div>
+        <div className="reg-right">
+          <div className="reg-form-wrap" style={{ textAlign: "center" }}>
+            <h2 className="reg-heading">CHECK YOUR EMAIL</h2>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.5)",
+                fontFamily: "sans-serif",
+                lineHeight: 1.7,
+                marginBottom: "24px",
+              }}
+            >
+              We sent a verification link to
+              <br />
+              <strong style={{ color: "#fff" }}>{formData.email}</strong>.<br />
+              Click it to activate your account before logging in.
+            </p>
+            <Link to="/" className="reg-back-link">
+              ← Back to Login
+            </Link>
+          </div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Container className="py-5" style={{ maxWidth: '600px' }}>
-      <h2 className="mb-4">Create an Account</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="registerFirstName">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="firstName"
-              placeholder="First name"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter your first name.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="6" controlId="registerLastName">
-            <Form.Label>Last name</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please enter your last name.
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-        <Form.Group className="mb-3" controlId="registerEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            required
-            type="email"
-            name="email"
-            placeholder="name@example.com"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please enter a valid email address.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="registerPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              minLength={8}
-            />
-            <Form.Control.Feedback type="invalid">
-              Password must be at least 8 characters.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="6" controlId="registerConfirmPassword">
-            <Form.Label>Confirm password</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              isInvalid={validated && !passwordsMatch}
-            />
-            <Form.Control.Feedback type="invalid">
-              Passwords do not match.
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Row>
-        <Form.Group className="mb-3" controlId="registerTerms">
-          <Form.Check
-            required
-            label="I agree to the terms and conditions"
-            feedback="You must agree before submitting."
-            feedbackType="invalid"
-          />
-        </Form.Group>
-        <div className="d-flex align-items-center gap-3">
-          <Button type="submit">Register</Button>
-          <Link to="/">Back to Login</Link>
+    <div className="reg-container">
+      <div className="reg-left">
+        <div className="reg-logo">
+          <span className="reg-logo-triangle">▲</span>
+          <span className="reg-logo-text">MEDSPACE</span>
         </div>
-      </Form>
-    </Container>
+        <div className="reg-brand">
+          <h1 className="reg-title">
+            MED
+            <br />
+            <span>SPACE</span>
+          </h1>
+          <div className="reg-tagline-row">
+            <div className="reg-accent-line"></div>
+            <p className="reg-tagline">
+              Medical education.
+              <br />
+              Learn. Quiz. Track.
+            </p>
+          </div>
+          <div className="reg-meta">MEDSPACE.DEV — 2026</div>
+        </div>
+      </div>
+
+      <div className="reg-right">
+        <div className="reg-form-wrap">
+          <h2 className="reg-heading">CREATE ACCOUNT</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label>USERNAME</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="Choose a username"
+                value={formData.username}
+                onChange={handleChange}
+                className={
+                  pulse === "error"
+                    ? "pulse-error"
+                    : pulse === "success"
+                      ? "pulse-success"
+                      : ""
+                }
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label>EMAIL ADDRESS</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                className={
+                  pulse === "error"
+                    ? "pulse-error"
+                    : pulse === "success"
+                      ? "pulse-success"
+                      : ""
+                }
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>PASSWORD</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Min 8 characters"
+                value={formData.password}
+                onChange={handleChange}
+                className={
+                  pulse === "error"
+                    ? "pulse-error"
+                    : pulse === "success"
+                      ? "pulse-success"
+                      : ""
+                }
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label>CONFIRM PASSWORD</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Repeat password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={
+                  pulse === "error"
+                    ? "pulse-error"
+                    : pulse === "success"
+                      ? "pulse-success"
+                      : ""
+                }
+                required
+              />
+            </div>
+            <div className="reg-terms">
+              <input type="checkbox" id="terms" required />
+              <label htmlFor="terms">I agree to the terms and conditions</label>
+            </div>
+            <button type="submit">CREATE ACCOUNT →</button>
+            {errorMsg && <p className="reg-error-msg">{errorMsg}</p>}
+          </form>
+          <div className="reg-footer">
+            <p>
+              Already have an account? <Link to="/">Sign in →</Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

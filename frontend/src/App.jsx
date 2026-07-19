@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./components/Login/Login.css";
 import "./components/informationpages/InfoPages.css";

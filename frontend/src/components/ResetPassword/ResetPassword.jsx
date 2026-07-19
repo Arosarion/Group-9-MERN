@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import "./ResetPassword.css";
 
 function ResetPassword() {
   const { token } = useParams();
@@ -12,7 +13,7 @@ function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Passwords do not match.");
       return;
     }
     try {
@@ -38,52 +39,71 @@ function ResetPassword() {
 
   if (success) {
     return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <h2>Password Reset!</h2>
-        <p>Your password has been updated. Redirecting to login...</p>
+      <div className="reset-container">
+        <div className="reset-card">
+          <div className="reset-logo">
+            <span className="reset-logo-triangle">▲</span>
+            <span className="reset-logo-text">MEDSPACE</span>
+          </div>
+          <h2 className="reset-heading">
+            PASSWORD
+            <br />
+            RESET
+          </h2>
+          <p className="reset-success-text">
+            Your password has been updated successfully.
+            <br />
+            Redirecting to login...
+          </p>
+          <Link to="/" className="reset-link">
+            ← Back to Login
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: "400px", margin: "4rem auto", padding: "2rem" }}>
-      <h2>Reset Password</h2>
-      <p>Enter your new password below.</p>
-      {error && (
-        <div style={{ color: "red", marginBottom: "12px" }}>{error}</div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="password"
-          placeholder="New password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-          minLength={8}
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "12px",
-            boxSizing: "border-box",
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Confirm new password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "12px",
-            boxSizing: "border-box",
-          }}
-        />
-        <button type="submit" style={{ width: "100%", padding: "8px" }}>
-          Reset Password
-        </button>
-      </form>
+    <div className="reset-container">
+      <div className="reset-card">
+        <div className="reset-logo">
+          <span className="reset-logo-triangle">▲</span>
+          <span className="reset-logo-text">MEDSPACE</span>
+        </div>
+        <h2 className="reset-heading">
+          RESET
+          <br />
+          PASSWORD
+        </h2>
+        <p className="reset-sub">Enter your new password below.</p>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>NEW PASSWORD</label>
+            <input
+              type="password"
+              placeholder="Min 8 characters"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              minLength={8}
+            />
+          </div>
+          <div className="input-group">
+            <label>CONFIRM PASSWORD</label>
+            <input
+              type="password"
+              placeholder="Repeat password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="reset-btn">
+            RESET PASSWORD →
+          </button>
+          {error && <p className="reset-error">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 }

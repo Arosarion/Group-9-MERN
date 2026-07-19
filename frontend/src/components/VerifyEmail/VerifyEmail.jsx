@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import "./VerifyEmail.css";
 
 function VerifyEmail() {
   const { token } = useParams();
@@ -53,62 +54,84 @@ function VerifyEmail() {
 
   if (status === "loading") {
     return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <p>Verifying your email...</p>
+      <div className="verify-container">
+        <div className="verify-card">
+          <div className="verify-logo">
+            <span className="verify-logo-triangle">▲</span>
+            <span className="verify-logo-text">MEDSPACE</span>
+          </div>
+          <h2 className="verify-heading">VERIFYING...</h2>
+          <p className="verify-text">Please wait while we verify your email.</p>
+        </div>
       </div>
     );
   }
 
   if (status === "success") {
     return (
-      <div style={{ textAlign: "center", padding: "4rem" }}>
-        <h2>Email Verified!</h2>
-        <p>Your account is now active. You can log in.</p>
-        <Link to="/">Go to Login</Link>
+      <div className="verify-container">
+        <div className="verify-card">
+          <div className="verify-logo">
+            <span className="verify-logo-triangle">▲</span>
+            <span className="verify-logo-text">MEDSPACE</span>
+          </div>
+          <h2 className="verify-heading">
+            EMAIL
+            <br />
+            VERIFIED
+          </h2>
+          <p className="verify-text">
+            Your account is now active.
+            <br />
+            You can now sign in.
+          </p>
+          <Link to="/" className="verify-link">
+            ← Go to Login
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: "400px", margin: "4rem auto", padding: "2rem" }}>
-      <h2>Verification Failed</h2>
-      <p>The link is invalid or has expired.</p>
-      <div style={{ marginTop: "24px" }}>
-        <p style={{ marginBottom: "8px", fontSize: "13px" }}>
-          Enter your email to get a new verification link:
+    <div className="verify-container">
+      <div className="verify-card">
+        <div className="verify-logo">
+          <span className="verify-logo-triangle">▲</span>
+          <span className="verify-logo-text">MEDSPACE</span>
+        </div>
+        <h2 className="verify-heading">
+          VERIFICATION
+          <br />
+          FAILED
+        </h2>
+        <p className="verify-text">
+          The link is invalid or has expired.
+          <br />
+          Enter your email to get a new verification link.
         </p>
-        <input
-          type="email"
-          placeholder="your@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "8px",
-            boxSizing: "border-box",
-          }}
-        />
-        <button
-          onClick={handleResend}
-          style={{ width: "100%", padding: "8px", marginBottom: "12px" }}
-        >
-          Resend Verification Email
+        <div className="verify-input-group">
+          <input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <button className="verify-btn" onClick={handleResend}>
+          RESEND VERIFICATION →
         </button>
         {resendStatus && (
           <p
-            style={{
-              fontSize: "13px",
-              color: resendStatus.includes("sent") ? "green" : "red",
-            }}
+            className={`verify-status ${resendStatus.includes("sent") ? "success" : "error"}`}
           >
             {resendStatus}
           </p>
         )}
+        <Link to="/register" className="verify-link">
+          Register instead →
+        </Link>
       </div>
-      <Link to="/register" style={{ fontSize: "13px" }}>
-        Register instead →
-      </Link>
     </div>
   );
 }

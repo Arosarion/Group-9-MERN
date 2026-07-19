@@ -1,57 +1,87 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./ForgotPass.css";
 
 function ForgotPassword() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/auth/forgot-password`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      // Always show success regardless of whether email exists (security)
       setSubmitted(true);
-    } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch {
+      setError("Something went wrong. Please try again.");
     }
   };
 
   if (submitted) {
     return (
-      <div style={{ textAlign: 'center', padding: '4rem' }}>
-        <h2>Check your email</h2>
-        <p>If that email exists, a reset link has been sent.</p>
-        <Link to="/">Back to Login</Link>
+      <div className="forgot-container">
+        <div className="forgot-card">
+          <div className="forgot-logo">
+            <span className="forgot-logo-triangle">▲</span>
+            <span className="forgot-logo-text">MEDSPACE</span>
+          </div>
+          <h2 className="forgot-heading">
+            CHECK YOUR
+            <br />
+            EMAIL
+          </h2>
+          <p className="forgot-success-text">
+            If that email exists, a reset link has been sent.
+            <br />
+            Check your inbox and click the link to reset your password.
+          </p>
+          <Link to="/" className="forgot-link">
+            ← Back to Login
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '400px', margin: '4rem auto', padding: '2rem' }}>
-      <h2>Forgot Password</h2>
-      <p>Enter your email and we'll send you a reset link.</p>
-      {error && <div style={{ color: 'red', marginBottom: '12px' }}>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ width: '100%', padding: '8px', marginBottom: '12px', boxSizing: 'border-box' }}
-        />
-        <button type="submit" style={{ width: '100%', padding: '8px' }}>
-          Send Reset Link
-        </button>
-      </form>
-      <p style={{ marginTop: '1rem' }}>
-        <Link to="/">Back to Login</Link>
-      </p>
+    <div className="forgot-container">
+      <div className="forgot-card">
+        <div className="forgot-logo">
+          <span className="forgot-logo-triangle">▲</span>
+          <span className="forgot-logo-text">MEDSPACE</span>
+        </div>
+        <h2 className="forgot-heading">
+          FORGOT
+          <br />
+          PASSWORD
+        </h2>
+        <p className="forgot-sub">
+          Enter your email and we'll send you a link to reset your password.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>EMAIL ADDRESS</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="forgot-btn">
+            SEND RESET LINK →
+          </button>
+          {error && <p className="forgot-error">{error}</p>}
+        </form>
+        <Link to="/" className="forgot-link">
+          ← Back to Login
+        </Link>
+      </div>
     </div>
   );
 }
