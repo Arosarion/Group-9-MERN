@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./LandingPage/LandingPage.css";
+import "./Sidebar.css"
 
 function SideBar() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ function SideBar() {
       <div className="lp-sidebar">
         <div className="lp-logo-triangle">▲</div>
         <div className="lp-nav-links">
-          <div className="lp-nav-item active">
+          <div className="lp-nav-item active" onClick={() => navigate("/home")}>
             <span className="lp-nav-icon">⌂</span>
             <span className="lp-nav-label">home</span>
           </div>

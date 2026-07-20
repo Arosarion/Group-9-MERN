@@ -1,0 +1,26 @@
+.FirstAid-container {
+    
+    position: relative;
+    display: flex;
+    background-image: url(assets/ivana-cajina-asuyh-_ZX54-unsplash.jpg);
+}
+.FirstAid-card {
+background-color: #3DC270;
+  opacity: 77%;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5%;
+  padding: 5%;
+
+  border-radius: 40px;
+  border-color: #65ff81;
+  border-style: solid;
+  border-width: 1px;
+
+  color: aliceblue;
+  box-shadow: 0 0px 25px rgba(87, 209, 118, 0.811);
+
+}
+#li{
+    padding-left: 2%;
+}
