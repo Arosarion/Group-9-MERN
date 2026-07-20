@@ -1,6 +1,9 @@
 import { useState } from "react";
 import SideBar from "../Sidebar";
 import AnatomyModel from "./Cprdemo";
+import myImage from "../../assets/b15704a1-6a1f-4dba-9704-a16a1f8dba48.webp"
+import SeizureImage from "../../assets/seizures.webp"
+import Bleeding from "../../assets/images.jpg"
 import "./InfoPages.css";
 import { Link } from 'react-router-dom'
 
@@ -11,7 +14,7 @@ export default function FirstAid() {
             <SideBar />
             <div className="FirstAid-card">
                 <h1>First Aid Tips</h1>
-                <h4>Having a knowledge of basic first aid skills could save someone's life or your own life. 
+                <h4 className="intro">Having a knowledge of basic first aid skills could save someone's life or your own life. 
                     These skills are easy to learn and recall in emergency situations. 
                     Basic skills like CPR, setting a splint, stopping bleeding in dire situations, 
                     are important life skills.
@@ -26,7 +29,7 @@ export default function FirstAid() {
                 </ul>
                 <br></br>
                 <h2>
-                    How to perform CPR:
+                    CPR and When to Do It:
                 </h2>
                 <AnatomyModel />
                 <h4>
@@ -73,7 +76,8 @@ Advertisement</li>
                  </h4>
 
                  <br></br>
-                 <h2>How to help someone who is choking</h2>
+                 <h2>How to Help A Choking Person</h2> <br></br>
+                 <img src={myImage} alt="Heimlich Maneuver Demonstration"  height={400} width={420}/> <br></br>
                  <h3>Adult</h3>
                  <h4>Remember the 5 and 5 method.
 If they can’t cough to clear their airways:
@@ -90,7 +94,8 @@ If they can’t cough to clear their airways:
                     <h3>If They're Unconcious</h3>
                     <h4>Lower person to the floor. Open their mouth and remove object if it’s visible. Start CPR and begin chest compressions.</h4>
                 <br></br>
-                <h2>How to help someone experiencing a seizure</h2>
+                <h2>How to help someone experiencing a seizure</h2><br></br>
+                <img src={SeizureImage} alt="How to treat someone experiening a seizure"  height={400} width={550}/> <br></br>
                 <h4>Perform the 3 S’s</h4>
                 <h4>
                     <ol>
@@ -112,10 +117,12 @@ Stay with them until the seizure ends and they are fully conscious. They may be 
                     </ul>
                 </h4>
                 <br></br>
-                <h2>How to treat severe bleeding</h2>
+                <h2>How to treat severe bleeding</h2><br></br>
+                <img src={Bleeding} alt="How to treat someone experiencing severe bleeding"  height={400} width={550}/> <br></br>
                 <h4>For a person experiencing severe, life-threatening external bleeding, immediately call 911. Put on gloves if available, then apply firm, continuous pressure to the wound using a clean cloth or bandage. If blood soaks through, place another cloth directly on top without removing the original one.
-Additional critical steps:
-                <ul>
+                </h4>
+                <h4>Additional critical steps:
+                    <ul>
                     <li>Do not remove embedded objects: If an object is stuck in the wound, leave it in place and apply pressure around it.</li>
                     <li>Elevate the wound: Raise the injured limb above heart level if it doesn't cause more pain.</li>
                     <li>Manage shock: Help the person lie down, keep them warm with a blanket, and elevate their feet.</li>

@@ -5,7 +5,7 @@
     background-image: url(assets/ivana-cajina-asuyh-_ZX54-unsplash.jpg);
 }
 .FirstAid-card {
-background-color: #3DC270;
+background-color: #452d7c;
   opacity: 77%;
   width: 50%;
   margin: 0 auto;
@@ -13,16 +13,23 @@ background-color: #3DC270;
   padding: 5%;
 
   border-radius: 40px;
-  border-color: #65ff81;
+  border-color: #8c00ff;
   border-style: solid;
   border-width: 1px;
 
   color: aliceblue;
-  box-shadow: 0 0px 25px rgba(87, 209, 118, 0.811);
+  box-shadow: 0 0px 25px rgba(138, 36, 255, 0.811);
 
 }
-ul {
+h1, .intro {
+    text-align: center;
+}
+ul, ol {
     padding-left: 3%;
+}
+img {
+  display: block;
+  margin: 0 auto;
 }
 .sketchfab-embed-wrapper {
   width: 100%;
