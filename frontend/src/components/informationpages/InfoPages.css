@@ -1,10 +1,10 @@
-.FirstAid-container {
+.FirstAid-container, .Anatomy-container {
     
     position: relative;
     display: flex;
     background-image: url(assets/ivana-cajina-asuyh-_ZX54-unsplash.jpg);
 }
-.FirstAid-card {
+.FirstAid-card, .Anatomy-card {
 background-color: #452d7c;
   opacity: 77%;
   width: 50%;
