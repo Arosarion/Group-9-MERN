@@ -17,10 +17,10 @@ jobs:
           script: |
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            cd ~/Group-9-MERN
+            cd ~/MedSpace
             git pull origin main
             echo "VITE_API_URL=https://medspace.dev" > frontend/.env
             npm install --prefix backend
             npm install --prefix frontend
             npm run build --prefix frontend
-            pm2 restart group9-api --update-env
+            pm2 restart medspace-api --update-env
