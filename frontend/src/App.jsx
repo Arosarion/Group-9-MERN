@@ -14,6 +14,7 @@ import FirstAid from "./components/informationpages/FirstAid";
 import Home from "./components/LandingPage/LandingPage";
 import Anatomy from "./components/informationpages/Anatomy";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ModelExplorer from "./components/ModelExplorer/ModelExplorer";
 
 function App() {
   return (
@@ -44,6 +45,15 @@ function App() {
         element={
           <ProtectedRoute>
             <Anatomy />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/explorer"
+        element={
+          <ProtectedRoute>
+            <ModelExplorer />
           </ProtectedRoute>
         }
       />

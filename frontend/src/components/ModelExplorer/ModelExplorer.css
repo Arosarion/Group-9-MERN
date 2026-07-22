@@ -1,0 +1,222 @@
+.model-explorer-page {
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  color: #ffffff;
+}
+
+.model-explorer-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 44px;
+  padding: 48px 5% 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.model-explorer-header {
+  width: min(100%, 900px);
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.model-explorer-eyebrow {
+  margin: 0 0 12px;
+  color: #b78cff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.model-explorer-header h1 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-family: "Orbitron", Arial, sans-serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.model-explorer-description {
+  max-width: 720px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.model-explorer-panel {
+  width: min(100%, 1400px);
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid rgba(183, 140, 255, 0.25);
+  border-radius: 28px;
+  background: rgba(12, 5, 24, 0.72);
+  backdrop-filter: blur(18px);
+  box-sizing: border-box;
+
+  box-shadow:
+    0 0 40px rgba(115, 64, 190, 0.14),
+    inset 0 0 40px rgba(255, 255, 255, 0.015);
+}
+
+.model-explorer-toolbar {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.model-explorer-mode-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.explorer-mode-button,
+.explorer-reset-button {
+  width: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+  padding: 10px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.05);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.explorer-mode-button:hover,
+.explorer-reset-button:hover {
+  color: #ffffff;
+  border-color: rgba(183, 140, 255, 0.5);
+  background: rgba(183, 140, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.explorer-mode-button.active {
+  color: #ffffff;
+  border-color: rgba(183, 140, 255, 0.72);
+
+  background: linear-gradient(
+    135deg,
+    rgba(121, 70, 194, 0.9),
+    rgba(75, 42, 125, 0.9)
+  );
+
+  box-shadow: 0 0 18px rgba(139, 77, 226, 0.3);
+}
+
+.explorer-reset-button {
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.model-explorer-help {
+  width: min(100%, 1400px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 24px auto 0;
+}
+
+.explorer-help-card {
+  min-height: 150px;
+  padding: 24px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 20px;
+
+  background: rgba(8, 3, 17, 0.58);
+  backdrop-filter: blur(10px);
+}
+
+.explorer-help-number {
+  display: block;
+  margin-bottom: 20px;
+  color: rgba(183, 140, 255, 0.78);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.explorer-help-card h2 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+.explorer-help-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .model-explorer-content {
+    padding: 42px 24px 54px;
+  }
+
+  .model-explorer-help {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .model-explorer-content {
+    margin-left: 0;
+    padding: 34px 14px 48px;
+  }
+
+  .model-explorer-header h1 {
+    font-size: 38px;
+  }
+
+  .model-explorer-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .model-explorer-mode-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .explorer-mode-button,
+  .explorer-reset-button {
+    width: 100%;
+  }
+
+  .model-explorer-panel {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .model-explorer-description {
+    font-size: 15px;
+  }
+}
