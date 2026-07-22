@@ -15,59 +15,41 @@ function SideBar() {
       <div className="lp-logo-triangle">▲</div>
 
       <div className="lp-nav-links">
-        <div
-          className="lp-nav-item active"
-          onClick={() => navigate("/home")}
-        >
+        <div className="lp-nav-item active" onClick={() => navigate("/home")}>
           <span className="lp-nav-icon">⌂</span>
           <span className="lp-nav-label">home</span>
         </div>
 
-        <div
-          className="lp-nav-item"
-          onClick={() => navigate("/firstaid")}
-        >
+        <div className="lp-nav-item" onClick={() => navigate("/firstaid")}>
           <span className="lp-nav-icon">✚</span>
           <span className="lp-nav-label">aid</span>
         </div>
 
-        <div
-          className="lp-nav-item"
-          onClick={() => navigate("/anatomy")}
-        >
+        <div className="lp-nav-item" onClick={() => navigate("/anatomy")}>
           <span className="lp-nav-icon">◎</span>
           <span className="lp-nav-label">learn</span>
         </div>
 
         <div
           className="lp-nav-item"
-          onClick={() => navigate("/explorer")}
+          onClick={() => navigate("/anatomy-explorer")}
         >
           <span className="lp-nav-icon">🦴</span>
           <span className="lp-nav-label">3D</span>
         </div>
 
-        <div
-          className="lp-nav-item"
-          onClick={() => navigate("/quiz")}
-        >
+        <div className="lp-nav-item" onClick={() => navigate("/quiz")}>
           <span className="lp-nav-icon">?</span>
           <span className="lp-nav-label">quiz</span>
         </div>
 
-        <div
-          className="lp-nav-item"
-          onClick={() => navigate("/profile")}
-        >
+        <div className="lp-nav-item" onClick={() => navigate("/profile")}>
           <span className="lp-nav-icon">👤</span>
           <span className="lp-nav-label">account</span>
         </div>
       </div>
 
-      <div
-        className="lp-nav-item lp-nav-logout"
-        onClick={handleLogout}
-      >
+      <div className="lp-nav-item lp-nav-logout" onClick={handleLogout}>
         <span className="lp-nav-icon">⏻</span>
         <span className="lp-nav-label">logout</span>
       </div>

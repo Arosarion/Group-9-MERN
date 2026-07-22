@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import "./components/Login/Login.css";
-import "./components/Sidebar.css"
+import "./components/Sidebar.css";
 import "./components/informationpages/InfoPages.css";
 
 import Login from "./components/Login/Login";
@@ -50,7 +49,7 @@ function App() {
       />
 
       <Route
-        path="/explorer"
+        path="/anatomy-explorer"
         element={
           <ProtectedRoute>
             <ModelExplorer />

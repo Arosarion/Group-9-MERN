@@ -280,21 +280,10 @@ header{
     top:40px;
 }
 
-/* .medical{
-   
+.card.anatomyExplorer{
+    background-color: linear-gradient(135deg, #1a1a2e, #16213e);
 }
-
-.organs{
-    
-}
-
-.bones{
-    
-}
-
-.quiz{
-   
-} */
+ 
 
 .overlay{
 

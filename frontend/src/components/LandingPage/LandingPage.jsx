@@ -55,10 +55,13 @@ function LandingPage() {
                 </p>
               </div>
             </a>
-            <a href="/temp" className="card leaderboard">
+            <a href="/anatomy-explorer" className="card anatomyExplorer">
               <div className="overlay">
-                <h2>Leaderboard</h2>
-                <p>See how you rank against other students.</p>
+                <h2>Anatomy Explorer</h2>
+                <p>
+                  Interact with 3D models of the human body. Explore anatomy in
+                  detail.
+                </p>
               </div>
             </a>
           </div>
