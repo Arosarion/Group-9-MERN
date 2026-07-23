@@ -14,6 +14,7 @@ import Home from "./components/LandingPage/LandingPage";
 import Anatomy from "./components/informationpages/Anatomy";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ModelExplorer from "./components/ModelExplorer/ModelExplorer";
+import Quiz from "./components/Quiz/Quiz";
 
 function App() {
   return (
@@ -53,6 +54,15 @@ function App() {
         element={
           <ProtectedRoute>
             <ModelExplorer />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/quiz"
+        element={
+          <ProtectedRoute>
+            <Quiz />
           </ProtectedRoute>
         }
       />
