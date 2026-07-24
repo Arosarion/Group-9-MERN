@@ -54,7 +54,7 @@ function SideBar() {
         </div>
         <div
           className={`lp-nav-item ${isActive("/profile") ? "active" : ""}`}
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate("/account-settings")}
         >
           <span className="lp-nav-icon">👤</span>
           <span className="lp-nav-label">account</span>

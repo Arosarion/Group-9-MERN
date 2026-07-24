@@ -3,6 +3,7 @@ import "./App.css";
 import "./components/Login/Login.css";
 import "./components/Sidebar.css";
 import "./components/informationpages/InfoPages.css";
+import "./components/AccountPage/Account.css"
 
 import Login from "./components/Login/Login";
 import RegistrationPage from "./components/register/RegistrationPage";
@@ -14,6 +15,7 @@ import Home from "./components/LandingPage/LandingPage";
 import Anatomy from "./components/informationpages/Anatomy";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ModelExplorer from "./components/ModelExplorer/ModelExplorer";
+import AccountSettings from "./components/AccountPage/account";
 import Quiz from "./components/Quiz/Quiz";
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPass />} />
       <Route path="/verify/:token" element={<VerifyEmail />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
+      
       <Route
         path="/home"
         element={
@@ -40,6 +43,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/account-settings" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
       <Route
         path="/anatomy"
         element={
